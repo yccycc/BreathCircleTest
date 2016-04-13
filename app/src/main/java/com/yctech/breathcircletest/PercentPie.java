@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
@@ -20,8 +21,8 @@ public class PercentPie extends View {
     private int mAnotherCirclePivotX;
     private int mAnotherCirclePivotY;
     private RectF mShareRect = new RectF();
-    private int mToDealNum = 3;
-    private int dealedNum = 5;
+    private int mToDealNum = 1;
+    private int mDealedNum = 6;
     private float mGapAngel;
     private int mGapLength = 8;
     private float offsetX, offsetY;
@@ -46,7 +47,7 @@ public class PercentPie extends View {
         mAnotherCirclePivotY = mOneCirclePivotY - 5;
         mCircleRadius = Math.min(mViewWidth, mViewHeight) / 4;
 
-        mGapAngel = 360 * mToDealNum / (mToDealNum + dealedNum);
+        mGapAngel = 360 * mDealedNum / (mToDealNum + mDealedNum);
 
         mShareRect = new RectF(mViewWidth / 2 - mCircleRadius, mViewHeight / 2 - mCircleRadius, mViewWidth / 2 + mCircleRadius, mViewHeight / 2 + mCircleRadius);
         offsetX = (float) (mGapLength * Math.cos(Math.PI / 180 * mGapAngel / 2));
@@ -60,6 +61,27 @@ public class PercentPie extends View {
         canvas.save();
         canvas.translate(offsetX, offsetY);
         canvas.drawArc(mShareRect, 360 - mGapAngel, mGapAngel, true, mPaint);
+        canvas.restore();
+//
+        canvas.save();
+        mPaint.setColor(Color.RED);
+        mPaint.setTextSize(20);
+        float toDealNumTextSize  = mPaint.measureText(String.valueOf(mToDealNum));
+        double toDealArcLength = Math.PI*mCircleRadius*(360 - mGapAngel)/180;
+        Path toDealPath = new Path();
+        toDealPath.addArc(mShareRect, 0, 360 - mGapAngel);
+        canvas.drawTextOnPath(String.valueOf(mToDealNum), toDealPath, (float) ((toDealArcLength - toDealNumTextSize) / 2), 0, mPaint);
+        canvas.restore();
+        //
+        canvas.save();
+        canvas.translate(offsetX, offsetY);
+        mPaint.setColor(Color.RED);
+        mPaint.setTextSize(20);
+        float dealedNumTextSize  = mPaint.measureText(String.valueOf(mDealedNum));
+        double dealedArcLength = Math.PI*mCircleRadius*(mGapAngel)/180;
+        Path dealedPath = new Path();
+        dealedPath.addArc(mShareRect, 360 - mGapAngel, mGapAngel);
+        canvas.drawTextOnPath(String.valueOf(mDealedNum), dealedPath, (float) ((dealedArcLength - dealedNumTextSize) / 2), 0, mPaint);
         canvas.restore();
     }
 
