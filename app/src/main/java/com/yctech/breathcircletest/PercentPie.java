@@ -15,11 +15,7 @@ public class PercentPie extends View {
     private Paint mPaint;
     private int mViewWidth;
     private int mViewHeight;
-    private int mOneCirclePivotX;
-    private int mOneCirclePivotY;
     private int mCircleRadius;
-    private int mAnotherCirclePivotX;
-    private int mAnotherCirclePivotY;
     private RectF mShareRect = new RectF();
     private int mToDealNum = 1;
     private int mDealedNum = 6;
@@ -41,10 +37,6 @@ public class PercentPie extends View {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         mViewWidth = getMeasuredWidth();
         mViewHeight = getMeasuredHeight();
-        mOneCirclePivotX = mViewWidth / 2;
-        mOneCirclePivotY = mViewHeight / 2;
-        mAnotherCirclePivotX = mOneCirclePivotX + 10;
-        mAnotherCirclePivotY = mOneCirclePivotY - 5;
         mCircleRadius = Math.min(mViewWidth, mViewHeight) / 4;
 
         mGapAngel = 360 * mDealedNum / (mToDealNum + mDealedNum);
