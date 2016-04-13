@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.yctech.breathcircletest.TestBreathPieActivity">
-    <com.yctech.breathcircletest.BreathPie
+    <com.yctech.breathcircletest.PercentPie
         android:layout_height="320dp"
         android:background="@android:color/black"
         android:layout_gravity="center_horizontal"

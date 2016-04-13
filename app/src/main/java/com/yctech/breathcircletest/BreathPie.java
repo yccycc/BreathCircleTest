@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.View;
 
 public class BreathPie extends View{
+    private final static int TO_BE_DEALED_COLOR = 0xFF4D50C0;
+    private final static int DEALED_COLOR = 0xFFBD814F;
     private Paint mPaint;
     private int mViewWidth;
     private int mViewHeight;
